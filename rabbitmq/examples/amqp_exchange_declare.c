@@ -46,7 +46,7 @@
 int main(int argc, char const *const *argv) {
   char const *hostname;
   int port, status;
-  char const *user,password;
+  char const *user,*password;
   char const *exchange;
   char const *exchangetype;
   amqp_socket_t *socket = NULL;
