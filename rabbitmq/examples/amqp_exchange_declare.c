@@ -46,6 +46,7 @@
 int main(int argc, char const *const *argv) {
   char const *hostname;
   int port, status;
+  char const *user,password;
   char const *exchange;
   char const *exchangetype;
   amqp_socket_t *socket = NULL;
@@ -77,8 +78,11 @@ int main(int argc, char const *const *argv) {
     die("opening TCP socket");
   }
 
+ // die_on_amqp_error(amqp_login(conn, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN,
+ //                              "guest", "guest"),
+//                        "Logging in");
   die_on_amqp_error(amqp_login(conn, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN,
-                               "guest", "guest"),
+                               user, password),
                     "Logging in");
   amqp_channel_open(conn, 1);
   die_on_amqp_error(amqp_get_rpc_reply(conn), "Opening channel");
